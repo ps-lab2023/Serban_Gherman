@@ -29,10 +29,9 @@ public class User {
     @Column(nullable = false)
     private String displayName;
 
-    @Column(nullable = false)
-    private Role role;
+    @Column()
+    private String role = "CLIENT";
 
-    public enum Role {
-        ARTIST, CLIENT
-    }
+    @Column(nullable = false)
+    private Boolean logged;
 }

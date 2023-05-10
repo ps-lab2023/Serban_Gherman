@@ -32,7 +32,7 @@ public class ArtistServiceTest {
     @Test
     public void testFindArtistById() {
         // Prepare data
-        User user = new User(1L, "username", "password", "user@example.com", "displayName", User.Role.ARTIST);
+        User user = new User(1L, "username", "password", "user@example.com", "displayName", "ARTIST");
         Artist expectedArtist = new Artist(1L, user,"biography");
 
         // Mock the repository

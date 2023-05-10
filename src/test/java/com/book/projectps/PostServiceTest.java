@@ -42,7 +42,7 @@ public class PostServiceTest {
                 .password("password")
                 .email("user@example.com")
                 .displayName("User")
-                .role(User.Role.ARTIST)
+                .role("ARTIST")
                 .build();
 
         artist = new Artist(1L, user, "bio");

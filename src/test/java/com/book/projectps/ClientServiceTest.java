@@ -37,7 +37,7 @@ public class ClientServiceTest {
                 .password("password")
                 .email("user@example.com")
                 .displayName("User")
-                .role(User.Role.CLIENT)
+                .role("Client")
                 .build();
 
         client = new Client(1L, "Arts", user);
