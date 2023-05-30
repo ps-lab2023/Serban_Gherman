@@ -10,5 +10,10 @@ public interface PostService {
     Post findById(Long id);
     Post save(Post post);
     void deleteById(Long id);
+
+    Post findByTitle(String title);
     List<Post> findByArtType(String type);
+
+    List<Post> findByArtist(String username);
 }
+;

@@ -31,7 +31,7 @@ public class PostServiceTest {
 
     private Post post1;
     private Post post2;
-    private Artist artist;
+    private String artist;
     private User user;
 
     @BeforeEach
@@ -45,11 +45,11 @@ public class PostServiceTest {
                 .role("ARTIST")
                 .build();
 
-        artist = new Artist(1L, user, "bio");
+        artist = "String";
 
         post1 = Post.builder()
                 .id(1L)
-                .artist(artist)
+                .artist("Gigel")
                 .title("Title1")
                 .description("Description1")
                 .createdAt(new Date())

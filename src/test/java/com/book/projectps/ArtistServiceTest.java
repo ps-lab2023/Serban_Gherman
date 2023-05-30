@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +33,7 @@ public class ArtistServiceTest {
     @Test
     public void testFindArtistById() {
         // Prepare data
-        User user = new User(1L, "username", "password", "user@example.com", "displayName", "ARTIST");
+        User user = new User(1L, "username", "password", "user@example.com", "displayName", "ARTIST", true, new ArrayList<>());
         Artist expectedArtist = new Artist(1L, user,"biography");
 
         // Mock the repository

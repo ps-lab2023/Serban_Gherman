@@ -8,6 +8,7 @@ import com.book.projectps.repository.UserRepository;
 import com.book.projectps.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Override
     public List<User> findAll() {
         return (List<User>) userRepository.findAll();
@@ -32,7 +33,8 @@ public class UserServiceImpl implements UserService {
         if (existingUser != null) {
             throw new UserAlreadyExistsException("User already exists with this email or username");
         }
-
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 
@@ -44,21 +46,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public void login(User user) {
 
-
-        if (user == null) {
+        User existingUser = userRepository.findByEmailOrUsername(user.getEmail(), user.getDisplayName());
+        System.out.println(user.getPassword());
+        System.out.println(existingUser.getPassword());
+        if (existingUser == null) {
             throw new UserNotFoundException("User not found with this email or username");
         }
-
+        //check pass
+        if ( passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            throw new UserNotFoundException("Invalid Password");
+        }
         // Update the "logged" attribute of the existing user
-        user.setLogged(true);
-        userRepository.save(user);
+        existingUser.setLogged(true);
+        userRepository.save(existingUser);
 
     }
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
+        User user = userRepository.findByEmailOrUsername("", username);
+        //check pass
+        if ( user != null && passwordEncoder.matches(password, user.getPassword()))
+        {
+            return user;
 
-        return userRepository.findByUsernameAndPassword(username, password);
+        }
+        return null;
     }
 
     @Override

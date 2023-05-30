@@ -1,10 +1,13 @@
 package com.book.projectps.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -34,4 +37,19 @@ public class User {
 
     @Column(nullable = false)
     private Boolean logged;
+    @ManyToMany(mappedBy = "likes")
+    @JsonManagedReference
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Post> likedPosts = new HashSet<>();
+
+
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
+    }
 }
+

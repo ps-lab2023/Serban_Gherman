@@ -1,11 +1,13 @@
-package com.book.projectps; // Replace with your package name
+package com.book.projectps.config; // Replace with your package name
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebMvc
 public class CORSConfig {
 
     @Bean
@@ -15,9 +17,10 @@ public class CORSConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:4200") // Replace with your frontend application's URL
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD")
                         .allowedHeaders("*")
                         .allowCredentials(true);
+
             }
         };
     }

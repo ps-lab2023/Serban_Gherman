@@ -8,7 +8,10 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
-    Iterable<Post> findByArtistId(Long artistId);
+    List<Post> findByArtist(String Artist);
+    List<Post> findAll();
     List<Post> findByArtType(String artType);
+
+    Post findByTitle(String title);
 }
 

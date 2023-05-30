@@ -16,7 +16,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAll() {
-        return (List<Post>) postRepository.findAll();
+        return postRepository.findAll();
     }
 
     @Override
@@ -33,9 +33,20 @@ public class PostServiceImpl implements PostService {
     public void deleteById(Long id) {
         postRepository.deleteById(id);
     }
+    @Override
+    public Post findByTitle(String title) {return postRepository.findByTitle(title);}
+
+    public PostRepository getPostRepository() {
+        return postRepository;
+    }
 
     @Override
     public List<Post> findByArtType(String type) {
         return postRepository.findByArtType(type);
+    }
+
+    @Override
+    public List<Post> findByArtist(String username) {
+        return postRepository.findByArtist(username);
     }
 }

@@ -6,6 +6,7 @@ public class RegisterRequest {
     private String email;
     private String password;
     private String role;
+    private String captchaResponse;
 
     public String getDisplayName() {
         return displayName;
@@ -33,6 +34,14 @@ public class RegisterRequest {
 
     public String getRole() {
         return role;
+    }
+
+    public String getCaptchaResponse() {
+        return captchaResponse;
+    }
+
+    public void setCaptchaResponse(String captchaResponse) {
+        this.captchaResponse = captchaResponse;
     }
 
     public void setRole(String role) {
